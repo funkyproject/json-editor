@@ -2,7 +2,8 @@
 	"name": "funkyproject/json-editor",
 	"require": {
 		"symfony/filesystem": "~2.6",
-		"neutron/temporary-filesystem": "~2.1"
+		"neutron/temporary-filesystem": "~2.1",
+		"symfony/finder": "~3.0@dev"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.5",

@@ -14,25 +14,45 @@ namespace Funkyproject\Component\JsonEditor\Tests;
 
 use Funkyproject\Component\JsonEditor\Editor;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Finder\Finder;
 
 /**
  * @property mixed path
  */
 class EditorTest extends \PHPUnit_Framework_TestCase
 {
+    const JSON_FILE   = "testa.json";
+    /**
+     * @var Editor
+     */
     private $editor;
 
     public static function setUpBeforeClass()
     {
         $filesystem = new Filesystem();
-        $filesystem->mirror(__DIR__."/Data", sys_get_temp_dir());
+        $filesystem->mirror(__DIR__."/Data", sys_get_temp_dir()."/");
+    }
+
+
+    public static function tearDownAfterClass()
+    {
+        $files = Finder::create()->
+            files()->
+            in(sys_get_temp_dir())->
+            depth(0)->
+            name("testa*");
+
+        /* @var $file \Symfony\Component\Finder\SplFileInfo */
+        foreach($files as $file) {
+            @unlink($file->getRealPath());
+        }
     }
 
 
     protected function setUp()
     {
         $this->path = sys_get_temp_dir();
-        $this->editor = new Editor($this->path."/testa.json");
+        $this->editor = new Editor(self::JSON_FILE, $this->path);
     }
 
     /**
@@ -49,6 +69,52 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     public function shouldHave3VersionOfDocumentYet()
     {
         $this->assertEquals(3, $this->editor->availableVersion());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldHave4VersionAfterFlushModification()
+    {
+        $this->editor->flush();
+        $this->assertEquals(4, $this->editor->availableVersion());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetValueForKey1()
+    {
+        $this->assertEquals(
+            "Lorem ipsum color sit amet",
+            $this->editor->get('KEY_1')
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function shouldSetValueForKey5()
+    {
+        $this->editor->set('KEY_5', 'Oho');
+        $this->editor->flush();
+
+        $editor = new Editor(self::JSON_FILE, $this->path);
+        $this->assertTrue($editor->has('KEY_5'));
+        $this->assertEquals(
+            "Oho",
+            $editor->get('KEY_5')
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function shouldDoNotHaveKey5AfterRollback()
+    {
+        $editor = new Editor(self::JSON_FILE, $this->path);
+        $editor->rollback();
+        $this->assertFalse($editor->has('KEY_5'));
     }
 }
  
