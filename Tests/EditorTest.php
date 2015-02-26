@@ -11,7 +11,6 @@
 
 namespace Funkyproject\Component\JsonEditor\Tests;
 
-
 use Funkyproject\Component\JsonEditor\Editor;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
@@ -21,7 +20,7 @@ use Symfony\Component\Finder\Finder;
  */
 class EditorTest extends \PHPUnit_Framework_TestCase
 {
-    const JSON_FILE   = "testa.json";
+    const JSON_FILE = "testa.json";
     /**
      * @var Editor
      */
@@ -30,9 +29,8 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     public static function setUpBeforeClass()
     {
         $filesystem = new Filesystem();
-        $filesystem->mirror(__DIR__."/Data", sys_get_temp_dir()."/");
+        $filesystem->mirror(__DIR__ . "/Data", sys_get_temp_dir() . "/");
     }
-
 
     public static function tearDownAfterClass()
     {
@@ -43,15 +41,14 @@ class EditorTest extends \PHPUnit_Framework_TestCase
             name("testa*");
 
         /* @var $file \Symfony\Component\Finder\SplFileInfo */
-        foreach($files as $file) {
+        foreach ($files as $file) {
             @unlink($file->getRealPath());
         }
     }
 
-
     protected function setUp()
     {
-        $this->path = sys_get_temp_dir();
+        $this->path   = sys_get_temp_dir();
         $this->editor = new Editor(self::JSON_FILE, $this->path);
     }
 
@@ -117,4 +114,3 @@ class EditorTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($editor->has('KEY_5'));
     }
 }
- 
