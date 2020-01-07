@@ -1,0 +1,13 @@
+language: php
+php:
+  - '7.0'
+  - '7.1'
+  - '7.2'
+  - '7.3'
+  - nightly
+env:
+  COMPOSER_PREF="--prefer-stable"
+  COMPOSER_PREF="--prefer-lowest"
+
+before_script: composer install ${COMPOSER_PREF}
+script: vendor/bin/phpunit --coverage-text

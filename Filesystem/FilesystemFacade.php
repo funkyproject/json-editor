@@ -1,17 +1,15 @@
 <?php
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
-/**
- *
- * @author     Aurelien Fontaine <aurelien@fontaine.mx>
- * @copyright  2015 Fontaine.mx 
- */
+declare(strict_types=1);
 
 namespace Funkyproject\Component\JsonEditor\Filesystem;
 
-
 use Symfony\Component\Filesystem\Filesystem;
 
+/**
+ * Limited file system.
+ *
+ * @package Funkyproject\Component\JsonEditor\Filesystem
+ */
 class FilesystemFacade  extends Filesystem implements FilesystemInterface
 {
 

@@ -1,18 +1,42 @@
 <?php
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
-/**
- *
- * @author     Aurelien Fontaine <aurelien@fontaine.mx>
- * @copyright  2015 Fontaine.mx 
- */
+declare(strict_types=1);
 
 namespace Funkyproject\Component\JsonEditor\Filesystem;
 
-
+/**
+ * Define the filesystem behaviors.
+ *
+ * @package Funkyproject\Component\JsonEditor\Filesystem
+ */
 interface FilesystemInterface
 {
-    public function rename($src, $target);
-    public function dumpFile($src, $content);
-    public function touch($file);
+    /**
+     * Rename files
+     *
+     * @param string $origin
+     * @param string $target
+     * @param bool $overwrite
+     *
+     * @return mixed
+     */
+    public function rename(string $origin, string $target, bool $overwrite = false);
+
+    /**
+     * Dump the content of file.
+     *
+     * @param string $filename
+     * @param $content
+     *
+     * @return mixed
+     */
+    public function dumpFile(string $filename, $content);
+
+    /**
+     * Create an empty file.
+     *
+     * @param $file
+     *
+     * @return mixed
+     */
+    public function touch(string $filename);
 } 
