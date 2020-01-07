@@ -6,7 +6,7 @@
 		"php": ">=7.1"
 	},
 	"require-dev": {
-		"phpunit/phpunit": "*"
+		"phpunit/phpunit": "~7.5|~8.5"
 	},
 
 	"authors": [
