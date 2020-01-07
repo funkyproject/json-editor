@@ -21,6 +21,5 @@
 			"Funkyproject\\Component\\JsonEditor\\": ""
 		}
 	},
-	"target-dir": "Funkyproject/Component/JsonEditor",
-	"minimum-stability": "dev"
+	"target-dir": "Funkyproject/Component/JsonEditor"
 }
