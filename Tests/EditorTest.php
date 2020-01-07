@@ -12,13 +12,14 @@
 namespace Funkyproject\Component\JsonEditor\Tests;
 
 use Funkyproject\Component\JsonEditor\Editor;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 
 /**
  * @property mixed path
  */
-class EditorTest extends \PHPUnit_Framework_TestCase
+class EditorTest extends TestCase
 {
     const JSON_FILE = "testa.json";
     /**
@@ -26,13 +27,13 @@ class EditorTest extends \PHPUnit_Framework_TestCase
      */
     private $editor;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         $filesystem = new Filesystem();
         $filesystem->mirror(__DIR__ . "/Data", sys_get_temp_dir() . "/");
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         $files = Finder::create()->
             files()->
@@ -46,7 +47,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->path   = sys_get_temp_dir();
         $this->editor = new Editor(self::JSON_FILE, $this->path);
