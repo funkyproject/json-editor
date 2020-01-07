@@ -9,4 +9,7 @@ env:
   - COMPOSER_PREF="--prefer-lowest"
 
 before_script: composer update ${COMPOSER_PREF}
-script: vendor/bin/phpunit --coverage-text
+script: vendor/bin/phpunit --coverage-clover=coverage.xml
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash) -t "95b37309-5472-41b3-b6a8-44291ccfc7a4"
