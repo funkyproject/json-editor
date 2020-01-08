@@ -39,4 +39,14 @@ interface FilesystemInterface
      * @return mixed
      */
     public function touch(string $filename);
+
+    /**
+     * Copy file.
+     *
+     * @param string $origin
+     * @param string $target
+     *
+     * @return mixed
+     */
+    public function copy(string $origin, string $target);
 } 

@@ -21,7 +21,7 @@ use Symfony\Component\Finder\Finder;
  */
 class EditorTest extends TestCase
 {
-    const JSON_FILE = "testa.json";
+    const JSON_FILE = 'testa.json';
     /**
      * @var Editor
      */
@@ -30,7 +30,7 @@ class EditorTest extends TestCase
     public static function setUpBeforeClass(): void
     {
         $filesystem = new Filesystem();
-        $filesystem->mirror(__DIR__ . "/Data", sys_get_temp_dir() . "/");
+        $filesystem->mirror(__DIR__ . '/Data', sys_get_temp_dir() . '/');
     }
 
     public static function tearDownAfterClass(): void
@@ -84,7 +84,7 @@ class EditorTest extends TestCase
     public function shouldGetValueForKey1()
     {
         $this->assertEquals(
-            "Lorem ipsum color sit amet",
+            'Lorem ipsum color sit amet',
             $this->editor->get('KEY_1')
         );
     }

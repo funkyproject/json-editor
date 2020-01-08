@@ -63,4 +63,12 @@ class FilesystemFacade implements FilesystemInterface
     {
         return $this->fs->touch($filename);
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function copy(string $origin, string $target)
+    {
+       $this->fs->copy($origin, $target, true);
+    }
 }
